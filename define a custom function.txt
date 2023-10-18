@@ -1,0 +1,11 @@
+def customfunction():
+    print ('This is how you define a custom function')
+#after the definition, leave an empty row to continue executing other parts of the code    
+customfunction ()
+print (2+2)
+#and this is how a function with an argument looks like
+def hello(name):
+    print('Hello ' + name)
+
+hello ('Alice')
+hello ('Bob')
