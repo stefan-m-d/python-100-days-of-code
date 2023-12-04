@@ -1,0 +1,11 @@
+from turtle import Turtle, Screen
+voldetort = Turtle()
+
+for _ in range(15):
+    voldetort.forward(10)
+    voldetort.penup()
+    voldetort.forward(10)
+    voldetort.pendown()
+
+screen = Screen()
+screen.exitonclick()

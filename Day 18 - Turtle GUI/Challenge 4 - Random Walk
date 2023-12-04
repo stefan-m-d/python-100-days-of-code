@@ -1,0 +1,16 @@
+from turtle import Turtle, Screen
+import random
+
+voldetort = Turtle()
+voldetort.pensize(15)
+voldetort.speed(0)
+i=0
+
+while i<=500:
+    voldetort.color(random.choice(["black", "blue", "red", "magenta", "orange", "teal", "tan", "green", "brown"]))
+    voldetort.setheading(random.choice([0, 90, 180, 270]))
+    voldetort.fd(15)
+    i+=1
+
+screen = Screen()
+screen.exitonclick()

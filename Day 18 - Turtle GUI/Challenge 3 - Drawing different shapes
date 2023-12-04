@@ -1,0 +1,15 @@
+from turtle import Turtle, Screen
+import random
+voldetort = Turtle()
+
+for i in range (3,15):
+    angle = 360/i
+    voldetort.shape("arrow")
+    voldetort.color(random.choice(["black", "blue", "red", "magenta", "orange", "teal", "tan", "green", "brown"]))
+    for _ in range(i):
+        voldetort.forward(60)
+        voldetort.right(angle)
+
+
+screen = Screen()
+screen.exitonclick()

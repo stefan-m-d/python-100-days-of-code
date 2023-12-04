@@ -1,0 +1,14 @@
+from turtle import Turtle
+import turtle
+
+voldetort = Turtle()
+voldetort.shape("arrow")
+voldetort.color("black")
+
+for _ in range(4):
+    voldetort.forward(100)
+    voldetort.right(90)
+
+screen = turtle.Screen()
+screen.exitonclick()
+

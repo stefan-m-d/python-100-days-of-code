@@ -1,0 +1,24 @@
+import turtle as t
+import random
+
+voldetort = t.Turtle()
+voldetort.pensize(15)
+voldetort.speed(0)
+i=0
+t.colormode(255)
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    tuple = (r, g, b)
+    return tuple
+
+while i<=200:
+    voldetort.color(random_color())
+    voldetort.setheading(random.choice([0, 90, 180, 270]))
+    voldetort.fd(15)
+    i+=1
+
+screen = t.Screen()
+screen.exitonclick()
