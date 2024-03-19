@@ -5,6 +5,7 @@ from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
 
+
 screen = Screen()
 screen.bgcolor("black")
 screen.setup(width=600, height=600)
@@ -14,13 +15,20 @@ snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
 
+
+
+# def check_file_empty ():
+#         return os.path.getsize(file_path) > 0
+
 screen.listen()
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
+
 game_on = True
+
 
 while game_on: 
     screen.update()
@@ -38,6 +46,7 @@ while game_on:
     if snake.head.xcor() > 285 or snake.head.xcor() < -285 or snake.head.ycor() > 285 or snake.head.ycor() < -285:
         game_on = False
         scoreboard.game_over()
+        scoreboard.update_highscore()
     
     # detect collision with tail
     
