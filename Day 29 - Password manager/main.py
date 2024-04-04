@@ -2,8 +2,9 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
-path = "Day 29 - Password manager/data.txt"
+path = "Day 29 - Password manager\data.json"
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -30,21 +31,65 @@ def save():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
+    new_data = {website: {
+        "email": email,
+        "password": password
+            }
+        
+        }
     
     if len(website) == 0 or len(password) == 0:
         messagebox.showerror(title=website, message="One or more fields are left empty. Please fill them in!")
     
-    else: 
-        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email} "
-                                   f"\nPassword: {password} \nIs it ok to save?")
-    if is_ok:
-        with open ("data.txt", "a") as data_file:
-            data_file.write(f"{website} | {email} | {password}\n")
+    else:  
+        
+        try: 
+            with open (path, "r") as data_file:
+                #Read old data
+                data = json.load(data_file)
+        
+        except FileNotFoundError:
+            with open (path, "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        
+        else:
+            #Update old data with new data
+            data.update(new_data)
+            with open (path, "w") as data_file:
+                json.dump(data, data_file, indent=4)
+            
+        finally:
             website_entry.delete(0,END)
             password_entry.delete(0,END)
 
     
+
+# ---------------------------- SEARCH PASSWORD IN FILE -----------------------------#
+
+def search():
     
+    website = website_entry.get()
+    
+    try: 
+        with open (path, "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="No data", message="No data file found. Enter some data first for a data file to be created.")
+    else:
+        if website in data:
+            result = data[website]
+            password=result["password"]
+            email = result['email']
+            pyperclip.copy(password)
+            messagebox.showinfo(title=website, message=f"Email: {email} \n Password: {password} \n Password has been copied to clipboard.")
+        else: 
+            messagebox.showinfo(title="No entry found.", message="No entry has been found for this search.")
+    
+            
+            
+
+
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -70,11 +115,11 @@ password_label.grid(column=0, row=3)
 
 #Entries
 
-website_entry = Entry(width=52)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=29)
+website_entry.grid(column=1, row=1)
 website_entry.focus()
 
-email_entry = Entry(width=52)
+email_entry = Entry(width=50)
 email_entry.grid(column=1, row=2, columnspan=2)
 email_entry.insert(0, "test@example.com")
 
@@ -88,5 +133,8 @@ add_btn.grid(column=1, row=4, columnspan=3)
 
 generate_pw_btn = Button(text="Generate Password", command=generate_password)
 generate_pw_btn.grid(column=2, row=3)
+
+search_btn = Button(text="Search", width=15, command=search)
+search_btn.grid(column=2, row=1)
 
 window.mainloop()
