@@ -14,7 +14,7 @@ search_params = {
             "adults": 2,
             "max_price": "250",
             "show_hidden": "true",
-            "api_key": "a862684f62c79199b0e9034d548648779cebd3f32efe4911f8c484ad46f33c73",
+            "api_key": "",
             "currency": "EUR"
             }
 
