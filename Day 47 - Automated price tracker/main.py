@@ -52,5 +52,5 @@ sheety_body = {
         }
     }
 
-sheety_response = requests.post(url=sheety_endpoint.strip('\"'), headers=sheety_headers, json=sheety_body) # we actually need the strip('\"') part here as otherwise, dockerizing this app fails because of the connection endpoint being interpreted with the quotes because of the .env file. Opera's Aria AI greatly helped with this
+sheety_response = requests.post(url=sheety_endpoint.strip('\"'), headers=sheety_headers, json=sheety_body) # we actually need the strip('\"') part here as otherwise, dockerizing this app fails because of the connection endpoint being interpreted with the quotes because of the .env file. 
 sheety_response.raise_for_status()

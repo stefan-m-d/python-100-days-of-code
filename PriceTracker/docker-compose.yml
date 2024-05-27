@@ -1,0 +1,7 @@
+services:
+  price-tracker-app:
+    image: stefanmd/price-tracker-app:1
+    container_name: price-tracker-app
+    env_file:
+      - ../Python.env
+    restart: "no"
